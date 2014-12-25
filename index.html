@@ -10,9 +10,14 @@
 	<script type="text/javascript">
 	var $window = $(window);
 	var $name;
+	var $btnCorrect;
+	var $btnIncorrect;
+	var changeTime = 10000;
 	var y = new Yalda();
-	h = new YaldaHelper(y, 10000);
-	$window.load(function () {
+	h = new YaldaHelper(y, changeTime);
+	
+	
+	$window.on('load', function () {
 		$name = $('.name');
 		y.add('MJafar');
 		y.add('Reza');
@@ -24,8 +29,8 @@
 		
 		h.animateRandomName();
 		
-		var $btnCorrect = $('button.correct');
-		var $btnIncorrect = $('button.incorrect');
+		$btnCorrect = $('button.correct');
+		$btnIncorrect = $('button.incorrect');
 		
 		$btnCorrect.on('click', function() {
 			h.answered(true);
@@ -40,10 +45,14 @@
 		if ($name.hasClass('fixed')) {
 			$name.removeClass('fixed');
 		}
+		//$btnCorrect.attr('disabled','disabled');
+		//$btnIncorrect.attr('disabled','disabled');
 	});
 	
 	$window.on('yalda.endRand', function (e){
 		$name.addClass('fixed');
+		//$btnCorrect.removeAttr('disabled');
+		//$btnIncorrect.removeAttr('disabled');
 	});
 	
 	$window.on('yalda.setName', function (e, name){
@@ -51,22 +60,33 @@
 	});
 	
 	$window.on('yalda.nextStage', function (e){
+		changeTime = Math.max(0.9 * changeTime, 5000);
+		h.setChangeTime(changeTime);
 		console.log('Went to next stage');
 	});
 	
 	$window.on('yalda.winner', function (e){
 		console.log('We have a winner');
 	});
+	
+	$window.on('yalda.participantsChanged', function(e) {
+		console.log(y.leftPeople());
+	});
+	
 	</script>
 	
 </head>
 
 <body>
+<div class="wrapper">
 
 <span class="name"></span>
 
-<button class="btn correct answer"> Correct </button>
-<button class="btn incorrect answer"> Incorrect </button>
+<div class="btnwrapper">
+	<button class="btn correct answer"> Correct </button>
+	<button class="btn incorrect answer"> Incorrect </button>
+</div>
 
+</div>
 </body>
 </html>

@@ -7,6 +7,10 @@
  color: red;
 }
 
+.btnwrapper {
+
+}
+
 .btn.answer {
 	color: blue;
 }
@@ -19,3 +23,14 @@
 	color: red;
 }
 
+body {
+	overflow:hidden;
+}
+.wrapper {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 2em;
+	position: fixed;
+	overflow:hidden;
+}

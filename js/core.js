@@ -12,13 +12,14 @@ function Yalda() {
 	var turn = 0;
 	
 	this.leftPeople = function () {
-		return participants;
+		return participants_ordered;
 	}
 	
 	this.remove = function (name) {
 		var index = participants.indexOf(name);
 		participants.splice(index, 1);
 		participants_ordered.splice(participants_ordered.indexOf(name), 1);
+		$window.trigger('yalda.participantsChanged');
 		
 		if (debug)
 			this.print();
@@ -28,6 +29,8 @@ function Yalda() {
 		all_participants.push(name);
 		participants.push(name);
 		participants_ordered.push(name);
+		$window.trigger('yalda.participantsChanged');
+		
 		if (debug)
 			this.print();
 	};
@@ -117,6 +120,10 @@ function YaldaHelper(y, _duration) {
 				}
 			}, dd[i]);
 		}
+	}
+	
+	this.setChangeTime = function(newTime) {
+		duration = newTime;
 	}
 	
 	this.answered = function(correct) {
