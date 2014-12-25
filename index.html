@@ -22,7 +22,9 @@
 	var $btnadd;
 	var $addDialog;
 	var $startDialog;
+	var $winnerDialog;
 	var $namebox;
+	var $winnerName;
 	var $round;
     var changeTime = 3000;
 	var isChanging = false;
@@ -39,10 +41,12 @@
 		$btnadd = $('.add');
 		$addDialog = $('#addDialog');
 		$startDialog = $('#startDialog');
+		$winnerDialog = $('#winnerDialog');
+		$winnerName = $('.winner.name');
 		$namebox = $('.name_box');
 		$round = $('.round');
         
-		$addDialog.fadeOut(0);
+		$('.dialogBackground:not(#startDialog)').fadeOut(0);
 		
         $btnCorrect.on('click', function() {
 			if (!isChanging) {
@@ -116,8 +120,9 @@
 		$round.html(round);
     });
     
-    $window.on('yalda.winner', function (e){
-        console.log('We have a winner');
+    $window.on('yalda.winner', function (e, name){
+		$winnerName.html(name);
+        $winnerDialog.fadeIn(300);
     });
     
     $window.on('yalda.participantsChanged', function(e) {
@@ -148,15 +153,12 @@
 	</div>
 </div>
 
-<div id="addDialog" class="dialogBackground" align="center">
-	<div class="frame">
-		<label for="add_name"></label><input name="add_name" class="name_box" type="text" value="" />
-		<div style="clear:both"></div>
-		<button class="btn correct answer" name="add"> اضافه </button>
-		<button class="btn answer" name="cancel"> لغو </button>
-	</div>
+<div id="winnerDialog" class="dialogBackground" align="center">
+	<span class="winner name"></span>
+	<div style="clear:both;"></div>
+	<span class="thanks">مرسی که هستی:)<br /></span>
+	<span class="thnaks small">شیرینی بده!</span></span>
 </div>
-
 
 <div id="startDialog" class="dialogBackground" align="center">
 	<div class="frame">
@@ -172,5 +174,18 @@
 		<button class="btn correct answer" name="start"> شروع </button>
 	</div>
 </div>
+
+
+
+<div id="addDialog" class="dialogBackground" align="center">
+	<div class="frame">
+		<label for="add_name"></label><input name="add_name" class="name_box" type="text" value="" />
+		<div style="clear:both"></div>
+		<button class="btn correct answer" name="add"> اضافه </button>
+		<button class="btn answer" name="cancel"> لغو </button>
+	</div>
+</div>
+
+
 </body>
 </html>
