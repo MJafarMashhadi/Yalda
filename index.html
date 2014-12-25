@@ -19,6 +19,7 @@
     var $btnCorrect;
     var $btnIncorrect;
     var changeTime = 4000;
+	var isChanging = false;
     var y = new Yalda();
     h = new YaldaHelper(y, changeTime);
     
@@ -43,11 +44,15 @@
         $btnIncorrect = $('button.incorrect');
         
         $btnCorrect.on('click', function() {
-            h.answered(true);
+			if (!isChanging) {
+				h.answered(true);
+			}
         });
         
         $btnIncorrect.on('click', function() {
-            h.answered(false);
+            if (!isChanging) {
+				h.answered(false);
+			}
         });
     });
     
@@ -55,6 +60,7 @@
         if ($name.hasClass('fixed')) {
             $name.removeClass('fixed');
         }
+		isChanging = true;
         //$btnCorrect.attr('disabled','disabled');
         //$btnIncorrect.attr('disabled','disabled');
     });
@@ -62,6 +68,7 @@
     $window.on('yalda.endRand', function (e){
         $name.addClass('fixed');
 		$name.pulse({fontSize:'470%'},{duration:280});
+		isChanging = false;
         //$btnCorrect.removeAttr('disabled');
         //$btnIncorrect.removeAttr('disabled');
     });
