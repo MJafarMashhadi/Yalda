@@ -11,25 +11,31 @@
     <meta name="copyright" content="Copyright 2014, MJafarMashhadi" />
     <link rel="stylesheet" href="css/main.css" />
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.pulse.min.js"></script>
     <script type="text/javascript" src="js/core.js"></script>
     <script type="text/javascript">
     var $window = $(window);
     var $name;
     var $btnCorrect;
     var $btnIncorrect;
-    var changeTime = 10000;
+    // var changeTime = 10000;
+	var changeTime = 1000;
     var y = new Yalda();
     h = new YaldaHelper(y, changeTime);
     
     
     $window.on('load', function () {
         $name = $('.name');
-        y.add('MJafar');
-        y.add('Reza');
-        y.add('Nima');
-        y.add('Hamid');
-        y.add('Ali');
-        y.add('Gharib');
+        y.add('محمدجعفر مشهدی‌ابراهیم');
+        y.add('رضا مسلمی');
+        y.add('نیما حمیدی');
+        y.add('مهیار جیجی');
+        y.add('سجاد فولادی');
+        y.add('مطیعی');
+		y.add('فرناز جهانبخش');
+		y.add('عباس');
+		y.add('تلباس');
+		y.add('سید آرین میرفندرسکی');
         y.shuffle();
         
         h.animateRandomName();
@@ -56,6 +62,7 @@
     
     $window.on('yalda.endRand', function (e){
         $name.addClass('fixed');
+		$name.pulse({fontSize:'470%'},{duration:280});
         //$btnCorrect.removeAttr('disabled');
         //$btnIncorrect.removeAttr('disabled');
     });
