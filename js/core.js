@@ -5,7 +5,7 @@ In the name of god
 var $window = $(window);
 
 function Yalda() {
-    var debug = true;
+    var debug = false;
     var all_participants = [];
     var participants = all_participants.slice(0); // Copy values
     var participants_ordered = participants.slice(0); // Copy values
@@ -93,32 +93,36 @@ function YaldaHelper(y, _duration) {
 			n.push(0);
         }
         
-        makeTimeout(0);
-        var name = '';
-        
-        $window.trigger('yalda.startRand');
-        
-        function makeTimeout(i) {
-            setTimeout(function() {
-                do {
-                    newName = yalda.getRandomName();
-                } while (name == newName);
-                name = newName;
-                $window.trigger('yalda.setName', [newName]);
-                ++n[i];
-				console.log(n);
-                if (n[i] >= ds[i]) {
-                    if (i < ds.length-1) {
-                        makeTimeout(i+1); 
-                    } else {
-                        $window.trigger('yalda.setName', [yalda.getCurrentName()]);
-                        $window.trigger('yalda.endRand');
-                    }
-                } else {
-                    makeTimeout(i);
-                }
-            }, dd[i]);
-        }
+		if (y.leftPeople().length > 3) {
+			makeTimeout(0);
+			var name = '';
+			
+			$window.trigger('yalda.startRand');
+			
+			function makeTimeout(i) {
+				setTimeout(function() {
+					do {
+						newName = yalda.getRandomName();
+					} while (name == newName);
+					name = newName;
+					$window.trigger('yalda.setName', [newName]);
+					++n[i];
+					if (n[i] >= ds[i]) {
+						if (i < ds.length-1) {
+							makeTimeout(i+1); 
+						} else {
+							$window.trigger('yalda.setName', [yalda.getCurrentName()]);
+							$window.trigger('yalda.endRand');
+						}
+					} else {
+						makeTimeout(i);
+					}
+				}, dd[i]);
+			}
+		} else {
+			$window.trigger('yalda.setName', [yalda.getCurrentName()]);
+			$window.trigger('yalda.endRand');
+		}
     }
     
     this.setChangeTime = function(newTime) {

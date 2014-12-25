@@ -18,7 +18,8 @@
     var $name;
     var $btnCorrect;
     var $btnIncorrect;
-    var changeTime = 4000;
+	var $level;
+    var changeTime = 3600;
 	var isChanging = false;
     var y = new Yalda();
     h = new YaldaHelper(y, changeTime);
@@ -26,22 +27,20 @@
     
     $window.on('load', function () {
         $name = $('.name');
-        y.add('محمدجعفر مشهدی‌ابراهیم');
-        y.add('رضا مسلمی');
-        y.add('نیما حمیدی');
+		$level = $('#level');
+		$btnCorrect = $('button.correct');
+        $btnIncorrect = $('button.incorrect');
+		
+        y.add('جعفر');
         y.add('مهیار جیجی');
         y.add('سجاد فولادی');
-        y.add('مطیعی');
-		y.add('فرناز جهانبخش');
+        //y.add('مطیعی');
+		//y.add('فرناز جهانبخش');
 		y.add('عباس');
-		y.add('تلباس');
-		y.add('سید آرین میرفندرسکی');
+		//y.add('تلباس');
+		//y.add('سید آرین میرفندرسکی');
         y.shuffle();
-        
         h.animateRandomName();
-        
-        $btnCorrect = $('button.correct');
-        $btnIncorrect = $('button.incorrect');
         
         $btnCorrect.on('click', function() {
 			if (!isChanging) {
@@ -78,9 +77,9 @@
     });
     
     $window.on('yalda.nextStage', function (e){
-        changeTime = Math.max(0.9 * changeTime, 1500);
+        changeTime = Math.max(0.9 * changeTime, 1000);
         h.setChangeTime(changeTime);
-        console.log('Went to next stage');
+        $level.append('<span class="melon"></span>');
     });
     
     $window.on('yalda.winner', function (e){
@@ -97,6 +96,16 @@
 
 <body>
 <div class="wrapper">
+
+<!--ul id="level_">
+<li class="melon"></li>
+<li class="melon"></li>
+<li class="melon"></li>
+</ul-->
+
+<div id="level">
+<span class="melon"></span>
+</div>
 
 <span class="name"></span>
 
