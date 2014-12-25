@@ -1,6 +1,6 @@
 .name {
-	clear:both;
-	display: block;
+    clear:both;
+    display: block;
 }
 
 .fixed {
@@ -12,25 +12,25 @@
 }
 
 .btn.answer {
-	color: blue;
+    color: blue;
 }
 
 .btn.correct.answer {
-	color: green;
+    color: green;
 }
 
 .btn.incorrect.answer {
-	color: red;
+    color: red;
 }
 
 body {
-	overflow:hidden;
+    overflow:hidden;
 }
 .wrapper {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 2em;
-	position: fixed;
-	overflow:hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 2em;
+    position: fixed;
+    overflow:hidden;
 }

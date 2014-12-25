@@ -1,80 +1,85 @@
 ﻿<!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 <head>
     <title>یلدا مبارک!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="copyright" content="Copyright 2014, MJafarMashhadi" />
-	<link rel="stylesheet" href="css/main.css" />
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/core.js"></script>
-	<script type="text/javascript">
-	var $window = $(window);
-	var $name;
-	var $btnCorrect;
-	var $btnIncorrect;
-	var changeTime = 10000;
-	var y = new Yalda();
-	h = new YaldaHelper(y, changeTime);
-	
-	
-	$window.on('load', function () {
-		$name = $('.name');
-		y.add('MJafar');
-		y.add('Reza');
-		y.add('Nima');
-		y.add('Hamid');
-		y.add('Ali');
-		y.add('Gharib');
-		y.shuffle();
-		
-		h.animateRandomName();
-		
-		$btnCorrect = $('button.correct');
-		$btnIncorrect = $('button.incorrect');
-		
-		$btnCorrect.on('click', function() {
-			h.answered(true);
-		});
-		
-		$btnIncorrect.on('click', function() {
-			h.answered(false);
-		});
-	});
-	
-	$window.on('yalda.startRand', function (e){
-		if ($name.hasClass('fixed')) {
-			$name.removeClass('fixed');
-		}
-		//$btnCorrect.attr('disabled','disabled');
-		//$btnIncorrect.attr('disabled','disabled');
-	});
-	
-	$window.on('yalda.endRand', function (e){
-		$name.addClass('fixed');
-		//$btnCorrect.removeAttr('disabled');
-		//$btnIncorrect.removeAttr('disabled');
-	});
-	
-	$window.on('yalda.setName', function (e, name){
-		$name.html(name);
-	});
-	
-	$window.on('yalda.nextStage', function (e){
-		changeTime = Math.max(0.9 * changeTime, 5000);
-		h.setChangeTime(changeTime);
-		console.log('Went to next stage');
-	});
-	
-	$window.on('yalda.winner', function (e){
-		console.log('We have a winner');
-	});
-	
-	$window.on('yalda.participantsChanged', function(e) {
-		console.log(y.leftPeople());
-	});
-	
-	</script>
-	
+    <link rel="stylesheet" href="css/main.css" />
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/core.js"></script>
+    <script type="text/javascript">
+    var $window = $(window);
+    var $name;
+    var $btnCorrect;
+    var $btnIncorrect;
+    var changeTime = 10000;
+    var y = new Yalda();
+    h = new YaldaHelper(y, changeTime);
+    
+    
+    $window.on('load', function () {
+        $name = $('.name');
+        y.add('MJafar');
+        y.add('Reza');
+        y.add('Nima');
+        y.add('Hamid');
+        y.add('Ali');
+        y.add('Gharib');
+        y.shuffle();
+        
+        h.animateRandomName();
+        
+        $btnCorrect = $('button.correct');
+        $btnIncorrect = $('button.incorrect');
+        
+        $btnCorrect.on('click', function() {
+            h.answered(true);
+        });
+        
+        $btnIncorrect.on('click', function() {
+            h.answered(false);
+        });
+    });
+    
+    $window.on('yalda.startRand', function (e){
+        if ($name.hasClass('fixed')) {
+            $name.removeClass('fixed');
+        }
+        //$btnCorrect.attr('disabled','disabled');
+        //$btnIncorrect.attr('disabled','disabled');
+    });
+    
+    $window.on('yalda.endRand', function (e){
+        $name.addClass('fixed');
+        //$btnCorrect.removeAttr('disabled');
+        //$btnIncorrect.removeAttr('disabled');
+    });
+    
+    $window.on('yalda.setName', function (e, name){
+        $name.html(name);
+    });
+    
+    $window.on('yalda.nextStage', function (e){
+        changeTime = Math.max(0.9 * changeTime, 5000);
+        h.setChangeTime(changeTime);
+        console.log('Went to next stage');
+    });
+    
+    $window.on('yalda.winner', function (e){
+        console.log('We have a winner');
+    });
+    
+    $window.on('yalda.participantsChanged', function(e) {
+        console.log(y.leftPeople());
+    });
+    
+    </script>
+    
 </head>
 
 <body>
@@ -83,8 +88,8 @@
 <span class="name"></span>
 
 <div class="btnwrapper">
-	<button class="btn correct answer"> Correct </button>
-	<button class="btn incorrect answer"> Incorrect </button>
+    <button class="btn correct answer"> Correct </button>
+    <button class="btn incorrect answer"> Incorrect </button>
 </div>
 
 </div>
