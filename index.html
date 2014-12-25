@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>یلدا مبارک!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="copyright" content="Copyright 2014, MJafarMashhadi" />
+	<link rel="stylesheet" href="css/main.css" />
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="js/core.js"></script>
+	<script type="text/javascript">
+	var $window = $(window);
+	var $name;
+	var y = new Yalda();
+	h = new YaldaHelper(y, 10000);
+	$window.load(function () {
+		$name = $('.name');
+		y.add('MJafar');
+		y.add('Reza');
+		y.add('Nima');
+		y.add('Hamid');
+		y.add('Ali');
+		y.add('Gharib');
+		y.shuffle();
+		
+		h.animateRandomName();
+		
+		var $btnCorrect = $('button.correct');
+		var $btnIncorrect = $('button.incorrect');
+		
+		$btnCorrect.on('click', function() {
+			h.answered(true);
+		});
+		
+		$btnIncorrect.on('click', function() {
+			h.answered(false);
+		});
+	});
+	
+	$window.on('yalda.startRand', function (e){
+		if ($name.hasClass('fixed')) {
+			$name.removeClass('fixed');
+		}
+	});
+	
+	$window.on('yalda.endRand', function (e){
+		$name.addClass('fixed');
+	});
+	
+	$window.on('yalda.setName', function (e, name){
+		$name.html(name);
+	});
+	
+	$window.on('yalda.nextStage', function (e){
+		console.log('Went to next stage');
+	});
+	
+	$window.on('yalda.winner', function (e){
+		console.log('We have a winner');
+	});
+	</script>
+	
+</head>
+
+<body>
+
+<span class="name"></span>
+
+<button class="btn correct answer"> Correct </button>
+<button class="btn incorrect answer"> Incorrect </button>
+
+</body>
+</html>

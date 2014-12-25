@@ -1,0 +1,21 @@
+.name {
+	clear:both;
+	display: block;
+}
+
+.fixed {
+ color: red;
+}
+
+.btn.answer {
+	color: blue;
+}
+
+.btn.correct.answer {
+	color: green;
+}
+
+.btn.incorrect.answer {
+	color: red;
+}
+
