@@ -19,6 +19,9 @@
     var $btnCorrect;
     var $btnIncorrect;
 	var $level;
+	var $btnadd;
+	var $addDialog;
+	var $namebox;
     var changeTime = 3600;
 	var isChanging = false;
     var y = new Yalda();
@@ -28,8 +31,13 @@
     $window.on('load', function () {
         $name = $('.name');
 		$level = $('#level');
-		$btnCorrect = $('button.correct');
-        $btnIncorrect = $('button.incorrect');
+		$btnCorrect = $('button#correct');
+        $btnIncorrect = $('button#incorrect');
+		$btnadd = $('.add');
+		$addDialog = $('#addDialog');
+		$namebox = $('.name_box');
+		
+		$addDialog.fadeOut(0);
 		
         y.add('جعفر');
         y.add('مهیار جیجی');
@@ -53,6 +61,23 @@
 				h.answered(false);
 			}
         });
+		
+		$btnadd.on('click', function() {
+			$addDialog.fadeIn(500);
+		});
+		
+		$('button[name=cancel]').on('click', function() {
+			$namebox.val('');
+			$addDialog.fadeOut(200);
+		});
+		
+		
+		$('button[name=add]').on('click', function() {
+			var new_name = $namebox.val();
+			y.add(new_name);
+			$namebox.val('');
+			$addDialog.fadeOut(200);
+		});
     });
     
     $window.on('yalda.startRand', function (e){
@@ -97,21 +122,29 @@
 <body>
 <div class="wrapper">
 
-<!--ul id="level_">
-<li class="melon"></li>
-<li class="melon"></li>
-<li class="melon"></li>
-</ul-->
-
 <div id="level">
 <span class="melon"></span>
 </div>
 
+<button class="btn add"></button>
+
 <span class="name"></span>
 
 <div class="btnwrapper" align="center">
-    <button class="btn correct answer"> درست </button>
-    <button class="btn incorrect answer"> نادرست </button>
+    <button class="btn correct answer" id="correct"> درست </button>
+    <button class="btn incorrect answer" id="incorrect"> نادرست </button>
+</div>
+
+<div id="addDialog" align="center">
+
+<div class="frame">
+<label for="add_name"></label><input name="add_name" class="name_box" type="text" value="" />
+<div style="clear:both"></div>
+<button class="btn correct answer" name="add"> اضافه </button>
+<button class="btn answer" name="cancel"> لغو </button>
+
+</div>
+
 </div>
 
 </div>

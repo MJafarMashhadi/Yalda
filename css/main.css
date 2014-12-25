@@ -9,6 +9,8 @@
 	font-size: 72px;
 	position: fixed;
 	top: 40%;
+	left:0;
+	right:0;
 }
 
 .fixed {
@@ -20,19 +22,25 @@
 	text-align:center;
 	position: fixed;
 	bottom: 100px;
-	width:100%;
+	left:0;
+	right:0;
+}
+
+.btn.answer, .name_box {
+	margin: 5px;
+	padding: 5px;
+	font-weight: bold;
+	font-family:'Mj_Flow';
+	-webkit-box-shadow: inset 0 6px 10px rgba(0,0,0,.125);
+	border: 1px solid #eee;
+	direction: rtl;
+	text-align:right;
 }
 
 .btn.answer {
     color: rgba(255,255,255,0.9);
-	font-size: 25px;
-	font-weight: bold;
-	font-family:'Mj_Flow';
-	margin: 10px 20px 10px 20px;
-	padding: 10px;
-	border: 1px solid #eee;
+	background-color: #333333;
 	-webkit-border-radius: 5px;
-	-webkit-box-shadow: inset 0 6px 10px rgba(0,0,0,.125);
 	cursor: hand;
 }
 
@@ -46,14 +54,22 @@
 	border-color: #d43f3a;
 }
 
+#correct, #incorrect {
+	font-size: 25px;
+	margin: 10px 20px 10px 20px;
+	padding: 10px;
+}
 body {
     overflow:hidden;
 	margin: 0;
 	padding: 0;
+	direction:rtl;
 }
 .wrapper {
-    width: 100%;
-    height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
     margin: 0;
     padding: 2em;
     position: fixed;
@@ -64,11 +80,11 @@ body {
     background-clip: padding-box;
     background-repeat: no-repeat;
     color: white;
-    height: 100vh;
 }
 
 ul#level  {
 	display: inline;
+	direction:ltr;
 }
 
 .melon {
@@ -77,4 +93,40 @@ ul#level  {
 	width: 35px;
 	height: 35px;
 	display: inline-block;
+}
+
+.add {
+	background: url('../img/add.png');
+	background-size: contain;
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	left: 2em;
+	bottom: 2em;
+	border: none;
+}
+
+#addDialog {
+	background: rgba(0,0,0,0.8);
+	width: 100%;
+	height: 100%;
+	overflow:hidden;
+	z-index:100;
+	position: fixed;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+}
+
+#addDialog .frame {
+	
+	width: 500px;
+	background: whitesmoke;
+	-webkit-border-radius: 5px;
+	
+	margin-top:20%;
+	
+	
+	padding: 30px;
 }
