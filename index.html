@@ -24,7 +24,7 @@
 	var $startDialog;
 	var $namebox;
 	var $round;
-    var changeTime = 3600;
+    var changeTime = 3000;
 	var isChanging = false;
     var y = new Yalda();
 	var round = 1;
@@ -42,6 +42,8 @@
 		$namebox = $('.name_box');
 		$round = $('.round');
         
+		$addDialog.fadeOut(0);
+		
         $btnCorrect.on('click', function() {
 			if (!isChanging) {
 				h.answered(true);
@@ -111,7 +113,7 @@
 		if (y.leftPeople().length > 4) {
 			$level.prepend('<span class="melon"></span>');
 		}
-		$round.html(tound);
+		$round.html(round);
     });
     
     $window.on('yalda.winner', function (e){
@@ -128,22 +130,22 @@
 
 <body>
 <div class="wrapper">
-<div id="level">
-<span class="melon"></span>
-<span class="round">1</span>
-</div>
-
-<span class="name"></span>
-
-<div class="lowerPart">
-	<div class="btnwrapper" align="center">
-		<button class="btn correct answer" id="correct"> درست </button>
-		<button class="btn incorrect answer" id="incorrect"> نادرست </button>
+	<div id="level">
+		<span class="melon"></span>
+		<span class="round">1</span>
 	</div>
-	<div class="addwrapper">
-		<button class="btn add"></button>
+
+	<span class="name"></span>
+
+	<div class="lowerPart">
+		<div class="btnwrapper" align="center">
+			<button class="btn correct answer" id="correct"> درست </button>
+			<button class="btn incorrect answer" id="incorrect"> نادرست </button>
+		</div>
+		<div class="addwrapper">
+			<button class="btn add"></button>
+		</div>
 	</div>
-</div>
 </div>
 
 <div id="addDialog" class="dialogBackground" align="center">

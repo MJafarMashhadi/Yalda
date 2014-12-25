@@ -71,7 +71,9 @@ function Yalda() {
     
     this.nextStage = function() {
         console.log('Next stage');
-        this.shuffle();
+		if (participants.length >= 3) {
+			this.shuffle();
+		}
         $window.trigger('yalda.nextStage');
     }
     
@@ -133,7 +135,8 @@ function YaldaHelper(y, _duration) {
         yalda.nextLevel(correct);
         if (yalda.leftPeople().length == 1) {
             console.log('We have winner');
-            $window.trigger('yalda.winner');
+			$window.trigger('yalda.setName', [yalda.getCurrentName()]);
+            $window.trigger('yalda.winner', [yalda.getCurrentName()]);
         } else {
             this.animateRandomName();
         }

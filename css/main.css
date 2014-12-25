@@ -139,10 +139,6 @@ body {
 	right:0;
 }
 
-.dialogBackground#addDialog  {
-	opacity: 0;
-}
-
 .dialogBackground .frame {
 	width: 500px;
 	background: whitesmoke;
