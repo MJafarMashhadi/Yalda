@@ -85,15 +85,14 @@ function YaldaHelper(y, _duration) {
     var duration = _duration;
     
     this.animateRandomName = function () {
-        var ds = [100, 50, 25, 10, 5];
-        var dd = [];
+        var ds = [100, 50, 25, 7];
+		var dd = [0.5, 0.5, 1, 1];
+		var n = [];
         for (var i=0; i<ds.length; ++i) {
-            var n = ds[i];
-            var timeSlice = duration/ds.length;
-            dd.push(timeSlice/n);
+            dd[i] *= (duration / ds[i]);
+			n.push(0);
         }
         
-        var times = 0;
         makeTimeout(0);
         var name = '';
         
@@ -106,9 +105,9 @@ function YaldaHelper(y, _duration) {
                 } while (name == newName);
                 name = newName;
                 $window.trigger('yalda.setName', [newName]);
-                ++times;
-                if (times >= ds[i]) {
-                    times = 0;
+                ++n[i];
+				console.log(n);
+                if (n[i] >= ds[i]) {
                     if (i < ds.length-1) {
                         makeTimeout(i+1); 
                     } else {

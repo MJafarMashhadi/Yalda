@@ -18,8 +18,7 @@
     var $name;
     var $btnCorrect;
     var $btnIncorrect;
-    // var changeTime = 10000;
-	var changeTime = 1000;
+    var changeTime = 4000;
     var y = new Yalda();
     h = new YaldaHelper(y, changeTime);
     
@@ -72,7 +71,7 @@
     });
     
     $window.on('yalda.nextStage', function (e){
-        changeTime = Math.max(0.9 * changeTime, 5000);
+        changeTime = Math.max(0.9 * changeTime, 1500);
         h.setChangeTime(changeTime);
         console.log('Went to next stage');
     });
@@ -94,9 +93,9 @@
 
 <span class="name"></span>
 
-<div class="btnwrapper">
-    <button class="btn correct answer"> Correct </button>
-    <button class="btn incorrect answer"> Incorrect </button>
+<div class="btnwrapper" align="center">
+    <button class="btn correct answer"> درست </button>
+    <button class="btn incorrect answer"> نادرست </button>
 </div>
 
 </div>
