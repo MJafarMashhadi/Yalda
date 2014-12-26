@@ -150,10 +150,10 @@ body {
 	height: 300px;
 }
 
-.winner.name {
+.winner {
 	color: rgba(0,0,0,0.8);
 	text-shadow: 0px 0px 25px rgba(0,0,0,0.5);
-	font-size: 6em;
+	font-size: 6em !important;
 }	
 .thanks {
 	font-family: 'Mj_Faraz';
