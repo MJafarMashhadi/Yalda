@@ -24,10 +24,11 @@
 	var $startDialog;
 	var $winnerDialog;
 	var $namebox;
+	var $batchNamebox;
 	var $winnerName;
 	var $round;
 	var $peopleNumber;
-    var changeTime = 3000;
+    var changeTime = 2500;
 	var isChanging = false;
     var y = new Yalda();
 	var round = 1;
@@ -45,7 +46,8 @@
 		$startDialog = $('#startDialog');
 		$winnerDialog = $('#winnerDialog');
 		$winnerName = $('.winner.name');
-		$namebox = $('.name_box');
+		$namebox = $('input.name_box');
+		$batchNamebox = $('textarea.name_box');
 		$round = $('.round');
 		$peopleNumber = $('#people_number');
         
@@ -81,7 +83,7 @@
 		});
 		
 		$('button[name=start]').on('click', function() {
-			var names_raw = $('textarea.name_box').val();
+			var names_raw = $batchNamebox.val();
 			var names_array = names_raw.split('\n');
 			for (var i=0; i<names_array.length; ++i) {
 				var name = names_array[i].trim();
@@ -114,9 +116,9 @@
         $name.html(name);
     });
     
-    $window.on('yalda.nextStage', function (e){
+    $window.on('yalda.nextRound', function (e){
 		++round;
-        changeTime = Math.max(0.9 * changeTime, 1000);
+        changeTime = Math.max(0.8 * changeTime, 1000);
         h.setChangeTime(changeTime);
 		if (y.leftPeople().length > 4) {
 			$level.prepend('<span class="melon"></span>');

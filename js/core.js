@@ -59,7 +59,7 @@ function Yalda() {
         }
         if (turn >= participants.length) {
             turn = 0;
-            this.nextStage();
+            this.nextRound();
         }
         
         return this.getCurrentName();
@@ -69,12 +69,12 @@ function Yalda() {
         return participants[turn];
     }
     
-    this.nextStage = function() {
-        console.log('Next stage');
+    this.nextRound = function() {
+        console.log('Next round');
 		if (participants.length >= 3) {
 			this.shuffle();
 		}
-        $window.trigger('yalda.nextStage');
+        $window.trigger('yalda.nextRound');
     }
     
     this.print = function () {
