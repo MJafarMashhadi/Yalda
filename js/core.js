@@ -71,7 +71,7 @@ function Yalda() {
     
     this.nextRound = function() {
         console.log('Next round');
-		if (participants.length >= 3) {
+		if (participants.length > 3) {
 			this.shuffle();
 		}
         $window.trigger('yalda.nextRound');
