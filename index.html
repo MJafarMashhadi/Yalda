@@ -128,7 +128,9 @@
     
     $window.on('yalda.winner', function (e, name){
 		$winnerName.html(name);
-        $winnerDialog.fadeIn(300);
+        $winnerDialog.fadeIn(300, function() {
+			$('.small').pulse({fontSize:'480%'}, {pulses:-1});
+		});
     });
     
     $window.on('yalda.participantsChanged', function(e) {
