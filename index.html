@@ -26,10 +26,12 @@
 	var $namebox;
 	var $winnerName;
 	var $round;
+	var $peopleNumber;
     var changeTime = 3000;
 	var isChanging = false;
     var y = new Yalda();
 	var round = 1;
+	var addedAll = false;
     h = new YaldaHelper(y, changeTime);
     
     
@@ -45,6 +47,7 @@
 		$winnerName = $('.winner.name');
 		$namebox = $('.name_box');
 		$round = $('.round');
+		$peopleNumber = $('#people_number');
         
 		$('.dialogBackground:not(#startDialog)').fadeOut(0);
 		
@@ -82,11 +85,12 @@
 			var names_array = names_raw.split('\n');
 			for (var i=0; i<names_array.length; ++i) {
 				var name = names_array[i].trim();
-				if (name.indexOf('#') != 0) {
+				if (name.indexOf('#') != 0 && name.length > 0) {
 					y.add(name);
 				}
 			}
 			y.shuffle();
+			addedAll = true;
 			$startDialog.fadeOut(500, function() {
 				h.animateRandomName();
 			});
@@ -127,6 +131,14 @@
     
     $window.on('yalda.participantsChanged', function(e) {
         console.log(y.leftPeople());
+		if (addedAll) {
+			$peopleNumber.fadeOut(500, function() {
+				$peopleNumber.html(y.leftPeople().length);
+				$peopleNumber.fadeIn(500);
+			});
+		} else {
+			$peopleNumber.html(y.leftPeople().length);
+		}
     });
     
     </script>
@@ -140,7 +152,7 @@
 		<span class="round">1</span>
 	</div>
 
-	<span class="name"></span>
+	<span class="name">محمد جعفر</span>
 
 	<div class="lowerPart">
 		<div class="btnwrapper" align="center">
@@ -148,7 +160,7 @@
 			<button class="btn incorrect answer" id="incorrect"> نادرست </button>
 		</div>
 		<div class="addwrapper">
-			<button class="btn add"></button>
+			<button class="btn add"></button><div class="peoplenumberwrapper"><span class="people number" id="people_number"> 0 </span> نفر تو بازی هستن!</div>
 		</div>
 	</div>
 </div>
@@ -169,7 +181,7 @@
 فرناز جهانبخش
 عباس
 تلباس
-سید آرین میرفندرسکی</textarea>
+باقر</textarea>
 		<div style="clear:both"></div>
 		<button class="btn correct answer" name="start"> شروع </button>
 	</div>
