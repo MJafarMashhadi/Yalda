@@ -71,9 +71,9 @@ function Yalda() {
     
     this.nextRound = function() {
         console.log('Next round');
-		if (participants.length > 3) {
-			this.shuffle();
-		}
+        if (participants.length > 3) {
+            this.shuffle();
+        }
         $window.trigger('yalda.nextRound');
     }
     
@@ -88,43 +88,43 @@ function YaldaHelper(y, _duration) {
     
     this.animateRandomName = function () {
         var ds = [100, 50, 25, 7];
-		var dd = [0.5, 0.5, 1, 1];
-		var n = [];
+        var dd = [0.5, 0.5, 1, 1];
+        var n = [];
         for (var i=0; i<ds.length; ++i) {
             dd[i] *= (duration / ds[i]);
-			n.push(0);
+            n.push(0);
         }
         
-		if (y.leftPeople().length > 3) {
-			makeTimeout(0);
-			var name = '';
-			
-			$window.trigger('yalda.startRand');
-			
-			function makeTimeout(i) {
-				setTimeout(function() {
-					do {
-						newName = yalda.getRandomName();
-					} while (name == newName);
-					name = newName;
-					$window.trigger('yalda.setName', [newName]);
-					++n[i];
-					if (n[i] >= ds[i]) {
-						if (i < ds.length-1) {
-							makeTimeout(i+1); 
-						} else {
-							$window.trigger('yalda.setName', [yalda.getCurrentName()]);
-							$window.trigger('yalda.endRand');
-						}
-					} else {
-						makeTimeout(i);
-					}
-				}, dd[i]);
-			}
-		} else {
-			$window.trigger('yalda.setName', [yalda.getCurrentName()]);
-			$window.trigger('yalda.endRand');
-		}
+        if (y.leftPeople().length > 3) {
+            makeTimeout(0);
+            var name = '';
+            
+            $window.trigger('yalda.startRand');
+            
+            function makeTimeout(i) {
+                setTimeout(function() {
+                    do {
+                        newName = yalda.getRandomName();
+                    } while (name == newName);
+                    name = newName;
+                    $window.trigger('yalda.setName', [newName]);
+                    ++n[i];
+                    if (n[i] >= ds[i]) {
+                        if (i < ds.length-1) {
+                            makeTimeout(i+1); 
+                        } else {
+                            $window.trigger('yalda.setName', [yalda.getCurrentName()]);
+                            $window.trigger('yalda.endRand');
+                        }
+                    } else {
+                        makeTimeout(i);
+                    }
+                }, dd[i]);
+            }
+        } else {
+            $window.trigger('yalda.setName', [yalda.getCurrentName()]);
+            $window.trigger('yalda.endRand');
+        }
     }
     
     this.setChangeTime = function(newTime) {
@@ -135,7 +135,7 @@ function YaldaHelper(y, _duration) {
         yalda.nextLevel(correct);
         if (yalda.leftPeople().length == 1) {
             console.log('We have winner');
-			$window.trigger('yalda.setName', [yalda.getCurrentName()]);
+            $window.trigger('yalda.setName', [yalda.getCurrentName()]);
             $window.trigger('yalda.winner', [yalda.getCurrentName()]);
         } else {
             this.animateRandomName();

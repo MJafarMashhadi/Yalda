@@ -11,105 +11,105 @@
     <meta name="copyright" content="Copyright 2014, MJafarMashhadi" />
     <link rel="stylesheet" href="css/main.css" />
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.pulse.min.js"></script>
+    <script type="text/javascript" src="js/jquery.pulse.min.js"></script>
     <script type="text/javascript" src="js/core.js"></script>
     <script type="text/javascript">
     var $window = $(window);
     var $name;
     var $btnCorrect;
     var $btnIncorrect;
-	var $level;
-	var $btnadd;
-	var $addDialog;
-	var $startDialog;
-	var $winnerDialog;
-	var $namebox;
-	var $batchNamebox;
-	var $winnerName;
-	var $round;
-	var $peopleNumber;
+    var $level;
+    var $btnadd;
+    var $addDialog;
+    var $startDialog;
+    var $winnerDialog;
+    var $namebox;
+    var $batchNamebox;
+    var $winnerName;
+    var $round;
+    var $peopleNumber;
     var changeTime = 2500;
-	var isChanging = false;
+    var isChanging = false;
     var y = new Yalda();
-	var round = 1;
-	var addedAll = false;
+    var round = 1;
+    var addedAll = false;
     h = new YaldaHelper(y, changeTime);
     
     
     $window.on('load', function () {
         $name = $('.name');
-		$level = $('#level');
-		$btnCorrect = $('button#correct');
+        $level = $('#level');
+        $btnCorrect = $('button#correct');
         $btnIncorrect = $('button#incorrect');
-		$btnadd = $('.add');
-		$addDialog = $('#addDialog');
-		$startDialog = $('#startDialog');
-		$winnerDialog = $('#winnerDialog');
-		$winnerName = $('.winner.name');
-		$namebox = $('input.name_box');
-		$batchNamebox = $('textarea.name_box');
-		$round = $('.round');
-		$peopleNumber = $('#people_number');
+        $btnadd = $('.add');
+        $addDialog = $('#addDialog');
+        $startDialog = $('#startDialog');
+        $winnerDialog = $('#winnerDialog');
+        $winnerName = $('.winner.name');
+        $namebox = $('input.name_box');
+        $batchNamebox = $('textarea.name_box');
+        $round = $('.round');
+        $peopleNumber = $('#people_number');
         
-		$('.dialogBackground:not(#startDialog)').fadeOut(0);
-		
+        $('.dialogBackground:not(#startDialog)').fadeOut(0);
+        
         $btnCorrect.on('click', function() {
-			if (!isChanging) {
-				h.answered(true);
-			}
+            if (!isChanging) {
+                h.answered(true);
+            }
         });
         
         $btnIncorrect.on('click', function() {
             if (!isChanging) {
-				h.answered(false);
-			}
+                h.answered(false);
+            }
         });
-		
-		$btnadd.on('click', function() {
-			$addDialog.fadeIn(500);
-		});
-		
-		$('button[name=cancel]').on('click', function() {
-			$namebox.val('');
-			$addDialog.fadeOut(200);
-		});
-		
-		
-		$('button[name=add]').on('click', function() {
-			var new_name = $namebox.val();
-			y.add(new_name);
-			$namebox.val('');
-			$addDialog.fadeOut(200);
-		});
-		
-		$('button[name=start]').on('click', function() {
-			var names_raw = $batchNamebox.val();
-			var names_array = names_raw.split('\n');
-			for (var i=0; i<names_array.length; ++i) {
-				var name = names_array[i].trim();
-				if (name.indexOf('#') != 0 && name.length > 0) {
-					y.add(name);
-				}
-			}
-			y.shuffle();
-			addedAll = true;
-			$startDialog.fadeOut(500, function() {
-				h.animateRandomName();
-			});
-		});
+        
+        $btnadd.on('click', function() {
+            $addDialog.fadeIn(500);
+        });
+        
+        $('button[name=cancel]').on('click', function() {
+            $namebox.val('');
+            $addDialog.fadeOut(200);
+        });
+        
+        
+        $('button[name=add]').on('click', function() {
+            var new_name = $namebox.val();
+            y.add(new_name);
+            $namebox.val('');
+            $addDialog.fadeOut(200);
+        });
+        
+        $('button[name=start]').on('click', function() {
+            var names_raw = $batchNamebox.val();
+            var names_array = names_raw.split('\n');
+            for (var i=0; i<names_array.length; ++i) {
+                var name = names_array[i].trim();
+                if (name.indexOf('#') != 0 && name.length > 0) {
+                    y.add(name);
+                }
+            }
+            y.shuffle();
+            addedAll = true;
+            $startDialog.fadeOut(500, function() {
+                h.animateRandomName();
+            });
+        });
     });
     
     $window.on('yalda.startRand', function (e){
         if ($name.hasClass('fixed')) {
             $name.removeClass('fixed');
         }
-		isChanging = true;
+        isChanging = true;
     });
     
     $window.on('yalda.endRand', function (e){
         $name.addClass('fixed');
-		$name.pulse({fontSize:'470%'},{duration:280});
-		isChanging = false;
+        $name.pulse({fontSize:'470%'},{duration:280});
+        isChanging = false;
     });
     
     $window.on('yalda.setName', function (e, name){
@@ -117,32 +117,32 @@
     });
     
     $window.on('yalda.nextRound', function (e){
-		++round;
+        ++round;
         changeTime = Math.max(0.8 * changeTime, 1000);
         h.setChangeTime(changeTime);
-		if (y.leftPeople().length > 4) {
-			$level.prepend('<span class="melon"></span>');
-		}
-		$round.html(round);
+        if (y.leftPeople().length > 4) {
+            $level.prepend('<span class="melon"></span>');
+        }
+        $round.html(round);
     });
     
     $window.on('yalda.winner', function (e, name){
-		$winnerName.html(name);
+        $winnerName.html(name);
         $winnerDialog.fadeIn(300, function() {
-			$('.small').pulse({fontSize:'480%'}, {pulses:-1});
-		});
+            $('.small').pulse({fontSize:'480%'}, {pulses:-1});
+        });
     });
     
     $window.on('yalda.participantsChanged', function(e) {
         console.log(y.leftPeople());
-		if (addedAll) {
-			$peopleNumber.fadeOut(500, function() {
-				$peopleNumber.html(y.leftPeople().length);
-				$peopleNumber.fadeIn(500);
-			});
-		} else {
-			$peopleNumber.html(y.leftPeople().length);
-		}
+        if (addedAll) {
+            $peopleNumber.fadeOut(500, function() {
+                $peopleNumber.html(y.leftPeople().length);
+                $peopleNumber.fadeIn(500);
+            });
+        } else {
+            $peopleNumber.html(y.leftPeople().length);
+        }
     });
     
     </script>
@@ -151,54 +151,48 @@
 
 <body>
 <div class="wrapper">
-	<div id="level">
-		<span class="melon"></span>
-		<span class="round">1</span>
-	</div>
+    <div id="level">
+        <span class="melon"></span>
+        <span class="round">1</span>
+    </div>
 
-	<span class="name">محمد جعفر</span>
+    <span class="name">محمد جعفر</span>
 
-	<div class="lowerPart">
-		<div class="btnwrapper" align="center">
-			<button class="btn correct answer" id="correct"> درست </button>
-			<button class="btn incorrect answer" id="incorrect"> نادرست </button>
-		</div>
-		<div class="addwrapper">
-			<button class="btn add"></button><div class="peoplenumberwrapper"><span class="people number" id="people_number"> 0 </span> نفر تو بازی هستن!</div>
-		</div>
-	</div>
+    <div class="lowerPart">
+        <div class="btnwrapper" align="center">
+            <button class="btn correct answer" id="correct"> درست </button>
+            <button class="btn incorrect answer" id="incorrect"> نادرست </button>
+        </div>
+        <div class="addwrapper">
+            <button class="btn add"></button><div class="peoplenumberwrapper"><span class="people number" id="people_number"> 0 </span> نفر تو بازی هستن!</div>
+        </div>
+    </div>
 </div>
 
 <div id="winnerDialog" class="dialogBackground" align="center">
-	<span class="winner name"></span>
-	<div style="clear:both;"></div>
-	<span class="thanks">مرسی که هستی:)<br /></span>
-	<span class="thnaks small">شیرینی بده!</span></span>
+    <span class="winner name"></span>
+    <div style="clear:both;"></div>
+    <span class="thanks">مرسی که هستی:)<br /></span>
+    <span class="thnaks small">شیرینی بده!</span></span>
 </div>
 
 <div id="startDialog" class="dialogBackground" align="center">
-	<div class="frame">
-		<textarea class="name_box">ممجفر
-سجاد فولادی
-مطیعی
-فرناز جهانبخش
-عباس
-تلباس
-باقر</textarea>
-		<div style="clear:both"></div>
-		<button class="btn correct answer" name="start"> شروع </button>
-	</div>
+    <div class="frame">
+        <textarea class="name_box"></textarea>
+        <div style="clear:both"></div>
+        <button class="btn correct answer" name="start"> شروع </button>
+    </div>
 </div>
 
 
 
 <div id="addDialog" class="dialogBackground" align="center">
-	<div class="frame">
-		<label for="add_name"></label><input name="add_name" class="name_box" type="text" value="" />
-		<div style="clear:both"></div>
-		<button class="btn correct answer" name="add"> اضافه </button>
-		<button class="btn answer" name="cancel"> لغو </button>
-	</div>
+    <div class="frame">
+        <label for="add_name"></label><input name="add_name" class="name_box" type="text" value="" />
+        <div style="clear:both"></div>
+        <button class="btn correct answer" name="add"> اضافه </button>
+        <button class="btn answer" name="cancel"> لغو </button>
+    </div>
 </div>
 
 </body>
